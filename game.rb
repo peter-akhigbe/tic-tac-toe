@@ -62,23 +62,26 @@ class Game
       [3, 5, 7]
     ]
 
-    hash = {
-      player_x: 0,
-      player_o: 0
-    }
-
     array.each do |inner_array|
-      hash[:player_x] = 0
-      hash[:player_o] = 0
+      hash = {
+        player_x: 0,
+        player_o: 0
+      }
 
       inner_array.each do |move|
         hash[:player_x] += 1 if @board.board_options[move] == @player_x.symbol
         hash[:player_o] += 1 if @board.board_options[move] == @player_o.symbol
       end
 
-      @winner = 'Player_X' if hash[:player_x] == 3
-      @winner = 'Player_O' if hash[:player_o] == 3
-      break
+      if hash[:player_x] == 3
+        @winner = 'Player_X'
+        break
+      end
+
+      if hash[:player_o] == 3
+        @winner = 'Player_O'
+        break
+      end
     end
   end
 
